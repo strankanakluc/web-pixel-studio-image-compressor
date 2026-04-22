@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Image Optimizer by Web Pixel Studio 1.1.0\n"
+"Project-Id-Version: Web Pixel Studio Image Compressor 1.1.0\n"
 "PO-Revision-Date: 2025-03-10 01:42:03+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -11,90 +11,90 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e\n"
 
-#: image-optimizer-by-webpixelstudio.php:25
-msgid "Image Optimizer by Web Pixel Studio Settings"
+#: web-pixel-studio-image-compressor.php:25
+msgid "Web Pixel Studio Image Compressor Settings"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:26
-msgid Image Optimizer by Web Pixel Studio
+#: web-pixel-studio-image-compressor.php:26
+msgid Web Pixel Studio Image Compressor
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:38
+#: web-pixel-studio-image-compressor.php:38
 msgid "Settings"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:46
+#: web-pixel-studio-image-compressor.php:46
 msgid "Also keep the original image"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:47
+#: web-pixel-studio-image-compressor.php:47
 msgid "Check if you want to keep the original file without optimization."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:48
+#: web-pixel-studio-image-compressor.php:48
 msgid "If unchecked, the original image will be deleted after successful conversion to WebP, saving disk space."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:54
+#: web-pixel-studio-image-compressor.php:54
 msgid "Image Quality"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:55
+#: web-pixel-studio-image-compressor.php:55
 msgid "Image quality after optimization (0-100). Higher quality takes up more storage. (0 - lowest, 100 - highest quality)"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:56
+#: web-pixel-studio-image-compressor.php:56
 msgid "The default value is 80."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:62
+#: web-pixel-studio-image-compressor.php:62
 msgid "Compression Method"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:63
+#: web-pixel-studio-image-compressor.php:63
 msgid "Image optimization (0-6)."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:64
+#: web-pixel-studio-image-compressor.php:64
 msgid "Higher value = greater image compression, which also means longer processing time during optimization."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:70
+#: web-pixel-studio-image-compressor.php:70
 msgid "Allowed Image Types"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:71
+#: web-pixel-studio-image-compressor.php:71
 msgid "Images to be optimized:"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:78
+#: web-pixel-studio-image-compressor.php:78
 msgid "The default images are JPEG, PNG, and GIF. Select other types if necessary. SVG files usually take up little space and do not need to be optimized."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:84
+#: web-pixel-studio-image-compressor.php:84
 msgid "Copy file name to alt text"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:85
+#: web-pixel-studio-image-compressor.php:85
 msgid "Check to automatically set image alt text based on the filename."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:86
+#: web-pixel-studio-image-compressor.php:86
 msgid "If you have SEO-friendly image titles, you can enable this option. Otherwise, leave the feature disabled."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:92
+#: web-pixel-studio-image-compressor.php:92
 msgid "Maximum Image Width"
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:93
+#: web-pixel-studio-image-compressor.php:93
 msgid "Set the maximum width for uploaded images (in pixels)."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:94
+#: web-pixel-studio-image-compressor.php:94
 msgid "Images wider than this value will be resized before further optimization. The default value is 1200 pixels."
 msgstr ""
 
-#: image-optimizer-by-webpixelstudio.php:100
+#: web-pixel-studio-image-compressor.php:100
 msgid "Optimizes images when uploading. Define the maximum image size and choose which file types should be converted to webp and what the compression or quality of the optimized image should be."
 msgstr ""

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Image Optimizer by Web Pixel Studio 1.1.0\n"
+"Project-Id-Version: Web Pixel Studio Image Compressor 1.1.0\n"
 "PO-Revision-Date: 2025-03-10 07:33+0100\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -14,27 +14,27 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "Language: sk_SK\n"
 
-#: image-optimizer-by-webpixelstudio.php:25
-msgid "Image Optimizer by Web Pixel Studio Settings"
+#: web-pixel-studio-image-compressor.php:25
+msgid "Web Pixel Studio Image Compressor Settings"
 msgstr "Optimalizácia obrázkov Nastavenia"
 
-#: image-optimizer-by-webpixelstudio.php:26
-msgid Image Optimizer by Web Pixel Studio
+#: web-pixel-studio-image-compressor.php:26
+msgid Web Pixel Studio Image Compressor
 msgstr "Optimalizácia obrázkov"
 
-#: image-optimizer-by-webpixelstudio.php:38
+#: web-pixel-studio-image-compressor.php:38
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: image-optimizer-by-webpixelstudio.php:46
+#: web-pixel-studio-image-compressor.php:46
 msgid "Also keep the original image"
 msgstr "Ponechajte aj pôvodný obrázok"
 
-#: image-optimizer-by-webpixelstudio.php:47
+#: web-pixel-studio-image-compressor.php:47
 msgid "Check if you want to keep the original file without optimization."
 msgstr "Začiarknite, či chcete zachovať pôvodný súbor bez optimalizácie."
 
-#: image-optimizer-by-webpixelstudio.php:48
+#: web-pixel-studio-image-compressor.php:48
 msgid ""
 "If unchecked, the original image will be deleted after successful conversion "
 "to WebP, saving disk space."
@@ -42,11 +42,11 @@ msgstr ""
 "Ak nie je začiarknuté, pôvodný obrázok sa po úspešnej konverzii na WebP "
 "odstráni, čím sa ušetrí miesto na disku."
 
-#: image-optimizer-by-webpixelstudio.php:54
+#: web-pixel-studio-image-compressor.php:54
 msgid "Image Quality"
 msgstr "Kvalita obrázku"
 
-#: image-optimizer-by-webpixelstudio.php:55
+#: web-pixel-studio-image-compressor.php:55
 msgid ""
 "Image quality after optimization (0-100). Higher quality takes up more "
 "storage. (0 - lowest, 100 - highest quality)"
@@ -54,19 +54,19 @@ msgstr ""
 "Kvalita obrázku po optimalizácii (0-100). Vyššia kvalita zaberá viac miesta. "
 "(0 – najnižšia, 100 – najvyššia kvalita)"
 
-#: image-optimizer-by-webpixelstudio.php:56
+#: web-pixel-studio-image-compressor.php:56
 msgid "The default value is 80."
 msgstr "Predvolená hodnota je 80."
 
-#: image-optimizer-by-webpixelstudio.php:62
+#: web-pixel-studio-image-compressor.php:62
 msgid "Compression Method"
 msgstr "Metóda kompresie"
 
-#: image-optimizer-by-webpixelstudio.php:63
+#: web-pixel-studio-image-compressor.php:63
 msgid "Image optimization (0-6)."
 msgstr "Optimalizácia obrazu (0-6)."
 
-#: image-optimizer-by-webpixelstudio.php:64
+#: web-pixel-studio-image-compressor.php:64
 msgid ""
 "Higher value = greater image compression, which also means longer processing "
 "time during optimization."
@@ -74,15 +74,15 @@ msgstr ""
 "Vyššia hodnota = väčšia kompresia obrazu, čo znamená aj dlhší čas "
 "spracovania pri optimalizácii."
 
-#: image-optimizer-by-webpixelstudio.php:70
+#: web-pixel-studio-image-compressor.php:70
 msgid "Allowed Image Types"
 msgstr "Povolené typy obrázkov"
 
-#: image-optimizer-by-webpixelstudio.php:71
+#: web-pixel-studio-image-compressor.php:71
 msgid "Images to be optimized:"
 msgstr "Obrázky, ktoré sa majú optimalizovať:"
 
-#: image-optimizer-by-webpixelstudio.php:78
+#: web-pixel-studio-image-compressor.php:78
 msgid ""
 "The default images are JPEG, PNG, and GIF. Select other types if necessary. "
 "SVG files usually take up little space and do not need to be optimized."
@@ -90,17 +90,17 @@ msgstr ""
 "Predvolené obrázky sú JPEG, PNG a GIF. V prípade potreby vyberte iné typy. "
 "Súbory SVG zvyčajne zaberajú málo miesta a nie je potrebné ich optimalizovať."
 
-#: image-optimizer-by-webpixelstudio.php:84
+#: web-pixel-studio-image-compressor.php:84
 msgid "Copy file name to alt text"
 msgstr "Skopíruje názov súboru do alternatívneho textu"
 
-#: image-optimizer-by-webpixelstudio.php:85
+#: web-pixel-studio-image-compressor.php:85
 msgid "Check to automatically set image alt text based on the filename."
 msgstr ""
 "Začiarknutím tejto možnosti sa automaticky nastaví alternatívny text obrázka "
 "podľa názvu súboru."
 
-#: image-optimizer-by-webpixelstudio.php:86
+#: web-pixel-studio-image-compressor.php:86
 msgid ""
 "If you have SEO-friendly image titles, you can enable this option. "
 "Otherwise, leave the feature disabled."
@@ -108,15 +108,15 @@ msgstr ""
 "Ak máte názvy obrázkov vhodné pre SEO, môžete túto možnosť povoliť. V "
 "opačnom prípade ponechajte funkciu zakázanú."
 
-#: image-optimizer-by-webpixelstudio.php:92
+#: web-pixel-studio-image-compressor.php:92
 msgid "Maximum Image Width"
 msgstr "Maximálna šírka obrázka"
 
-#: image-optimizer-by-webpixelstudio.php:93
+#: web-pixel-studio-image-compressor.php:93
 msgid "Set the maximum width for uploaded images (in pixels)."
 msgstr "Nastavte maximálnu šírku pre nahraté obrázky (v pixeloch)."
 
-#: image-optimizer-by-webpixelstudio.php:94
+#: web-pixel-studio-image-compressor.php:94
 msgid ""
 "Images wider than this value will be resized before further optimization. "
 "The default value is 1200 pixels."
@@ -124,7 +124,7 @@ msgstr ""
 "Veľkosť obrázkov širších ako táto hodnota sa pred ďalšou optimalizáciou "
 "zmení. Predvolená hodnota je 1200 pixelov."
 
-#: image-optimizer-by-webpixelstudio.php:100
+#: web-pixel-studio-image-compressor.php:100
 msgid ""
 "Optimizes images when uploading. Define the maximum image size and choose "
 "which file types should be converted to webp and what the compression or "

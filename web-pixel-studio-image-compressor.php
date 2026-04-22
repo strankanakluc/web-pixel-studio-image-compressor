@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Image Optimizer by Web Pixel Studio
- * Plugin URI: http://wordpress.org/plugins/image-optimizer-by-webpixelstudio
+ * Plugin Name: Web Pixel Studio Image Compressor
+ * Plugin URI: http://wordpress.org/plugins/web-pixel-studio-image-compressor
  * Description: Optimizes images on upload. Convert JPEG, PNG, GIF, BMP, TIFF, and HEIC/HEIF to WebP. Define max. size and select the types of images to convert and what quality the optimized image should have.
  * Author: Web Pixel Studio
  * Author URI: https://wps.sk
@@ -9,7 +9,7 @@
  * Tested up to: 6.9
  * License: GPL-2.0+
  * @category Plugin
- * @package  Image_Optimizer_by_Web_Pixel_Studio
+ * @package  Web_Pixel_Studio_Image_Compressor
  * @link     https://wps.sk
  * @php      7.4
  */
@@ -21,14 +21,14 @@ function imagopby_settings_page()
 {
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Image Optimizer', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></h1>
+        <h1><?php esc_html_e('Image Optimizer', 'web-pixel-studio-image-compressor'); ?></h1>
         
         <form action='options.php' method='post'>
             <div class="imagopby-section-header">
-                <h2><?php esc_html_e('Plugin Settings', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></h2>
+                <h2><?php esc_html_e('Plugin Settings', 'web-pixel-studio-image-compressor'); ?></h2>
             </div>
             <div class="imagopby-section-description">
-                <p><?php esc_html_e('Optimizes images when uploading. Convert JPEG, PNG, GIF, BMP, TIFF, and HEIC/HEIF files to WebP format for better performance. Define the maximum image size and choose which file types should be converted and what quality the optimized image should have.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+                <p><?php esc_html_e('Optimizes images when uploading. Convert JPEG, PNG, GIF, BMP, TIFF, and HEIC/HEIF files to WebP format for better performance. Define the maximum image size and choose which file types should be converted and what quality the optimized image should have.', 'web-pixel-studio-image-compressor'); ?></p>
             </div>
             <table class="form-table imagopby-form-section">
                 <?php
@@ -38,31 +38,31 @@ function imagopby_settings_page()
             </table>
             <div class="submit">
                 <button type="button" class="button imagopby-bulk-btn" id="imagopby-optimize-gallery-btn">
-                    <?php esc_html_e('Start Bulk Optimization', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+                    <?php esc_html_e('Start Bulk Optimization', 'web-pixel-studio-image-compressor'); ?>
                 </button>
                 <button type="submit" class="button imagopby-save-btn">
-                    <?php esc_html_e('Save Settings', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+                    <?php esc_html_e('Save Settings', 'web-pixel-studio-image-compressor'); ?>
                 </button>
             </div>
         </form>
 
         <div class="imagopby-footer">
-            <h2><?php esc_html_e('Thank you for using Image Optimizer!', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></h2>
-            <h3><?php esc_html_e('We\'re committed to helping your website perform better.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></h3>
+            <h2><?php esc_html_e('Thank you for using Image Optimizer!', 'web-pixel-studio-image-compressor'); ?></h2>
+            <h3><?php esc_html_e('We\'re committed to helping your website perform better.', 'web-pixel-studio-image-compressor'); ?></h3>
             
             <div class="imagopby-social-links">
-                <?php esc_html_e('Follow us:', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+                <?php esc_html_e('Follow us:', 'web-pixel-studio-image-compressor'); ?>
                 <a href="https://www.instagram.com/tvorbawebov/" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.facebook.com/strankanakluc/" target="_blank" rel="noopener noreferrer">Facebook</a>
             </div>
             
-            <h3><?php esc_html_e('Visit our website to learn more:', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></h3>
+            <h3><?php esc_html_e('Visit our website to learn more:', 'web-pixel-studio-image-compressor'); ?></h3>
             <p class="imagopby-website">
                 <a href="https://wps.sk" target="_blank" rel="noopener noreferrer">wps.sk</a>
             </p>
             
             <h3 style="margin-top: 20px; font-size: 0.9em; color: #999;">
-                <?php esc_html_e('Image Optimizer by', 'Image-Optimizer-by-Web-Pixel-Studio'); ?> <strong><?php esc_html_e('Web Pixel Studio', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></strong>
+                <?php esc_html_e('Image Optimizer by', 'web-pixel-studio-image-compressor'); ?> <strong><?php esc_html_e('Web Pixel Studio', 'web-pixel-studio-image-compressor'); ?></strong>
             </h3>
         </div>
     </div>
@@ -73,7 +73,7 @@ function imagopby_settings_page()
             let $btn = $(this);
             let $barbg = $('#imagopby-progress-bar-bg').show();
             let $bar = $('#imagopby-progress-bar').css({width:'0%'}).show();
-            let $status = $('#imagopby-progress-status').text('<?php esc_html_e("Initializing...", "Image-Optimizer-by-Web-Pixel-Studio"); ?>');
+            let $status = $('#imagopby-progress-status').text('<?php esc_html_e("Initializing...", "web-pixel-studio-image-compressor"); ?>');
             $btn.prop('disabled', true);
             let step = 0;
             function runStep() {
@@ -85,17 +85,17 @@ function imagopby_settings_page()
                 }, function(resp){
                     if(resp.success) {
                         $bar.css({width:resp.data.progress+'%'});
-                        $status.text(resp.data.progress + '% - <?php esc_html_e("Processing", "Image-Optimizer-by-Web-Pixel-Studio"); ?>: ' + resp.data.optimized + '/' + resp.data.total);
+                        $status.text(resp.data.progress + '% - <?php esc_html_e("Processing", "web-pixel-studio-image-compressor"); ?>: ' + resp.data.optimized + '/' + resp.data.total);
                         if(resp.data.finished) {
                             $btn.prop('disabled', false);
-                            $status.text('<?php esc_html_e("✓ Done! Optimized images:", "Image-Optimizer-by-Web-Pixel-Studio"); ?> ' + resp.data.optimized);
+                            $status.text('<?php esc_html_e("✓ Done! Optimized images:", "web-pixel-studio-image-compressor"); ?> ' + resp.data.optimized);
                         } else {
                             step = resp.data.step;
                             setTimeout(runStep, 400);
                         }
                     } else {
                         $btn.prop('disabled', false);
-                        $status.text('<?php esc_html_e("✗ Error:", "Image-Optimizer-by-Web-Pixel-Studio"); ?> ' + resp.data);
+                        $status.text('<?php esc_html_e("✗ Error:", "web-pixel-studio-image-compressor"); ?> ' + resp.data);
                     }
                 });
             }
@@ -124,7 +124,7 @@ add_action('admin_enqueue_scripts', 'imagopby_enqueue_admin_styles');
 function imagopby_enqueue_admin_styles($hookSuffix)
 {
     if ($hookSuffix == 'settings_page_imagopby') {
-        wp_enqueue_style('imagopby-admin', plugin_dir_url(__FILE__) . 'image-optimizer-by-webpixelstudio-admin.css', array(), '1.0.0');
+        wp_enqueue_style('imagopby-admin', plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.css', array(), '1.0.0');
     }
 }
 
@@ -135,48 +135,48 @@ function imagopby_register_settings()
     register_setting('imagopby_settings', 'imagopby_settings', 'imagopby_sanitize_settings');
     add_settings_section(
         'imagopby_main_settings',
-        __('Settings', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Settings', 'web-pixel-studio-image-compressor'),
         'imagopby_section_callback',
         'imagopby_settings'
     );
     add_settings_field(
         'retain_original',
-        __('Also keep the original image', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Also keep the original image', 'web-pixel-studio-image-compressor'),
         'imagopby_render_retain_original',
         'imagopby_settings',
         'imagopby_main_settings'
     );
     add_settings_field(
         'quality',
-        __('Image Quality', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Image Quality', 'web-pixel-studio-image-compressor'),
         'imagopby_render_quality',
         'imagopby_settings',
         'imagopby_main_settings'
     );
     add_settings_field(
         'method',
-        __('Compression Method', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Compression Method', 'web-pixel-studio-image-compressor'),
         'imagopby_render_method',
         'imagopby_settings',
         'imagopby_main_settings'
     );
     add_settings_field(
         'allowed_types',
-        __('Allowed Image Types', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Allowed Image Types', 'web-pixel-studio-image-compressor'),
         'imagopby_render_allowed_types',
         'imagopby_settings',
         'imagopby_main_settings'
     );
     add_settings_field(
         'set_alt_text',
-        __('Copy file name to alt text', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Copy file name to alt text', 'web-pixel-studio-image-compressor'),
         'imagopby_render_set_alt_text',
         'imagopby_settings',
         'imagopby_main_settings'
     );
     add_settings_field(
         'max_width',
-        __('Maximum Image Width', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Maximum Image Width', 'web-pixel-studio-image-compressor'),
         'imagopby_render_max_width',
         'imagopby_settings',
         'imagopby_main_settings'
@@ -184,7 +184,7 @@ function imagopby_register_settings()
     // Bulk optimization button – as a settings field (so it appears in the same block)
     add_settings_field(
         'bulk_optimization',
-        __('Bulk image optimization', 'Image-Optimizer-by-Web-Pixel-Studio'),
+        __('Bulk image optimization', 'web-pixel-studio-image-compressor'),
         'imagopby_render_bulk_optimization_btn',
         'imagopby_settings',
         'imagopby_main_settings'
@@ -217,7 +217,7 @@ function imagopby_sanitize_settings($input)
 
 function imagopby_section_callback()
 {
-    echo '<p>' . esc_html__('Optimizes images when uploading. Convert JP, PNG, GIF, BMP, TIFF, and HEIC/HEIF files to WebP format. Define the maximum image size and choose which file types should be converted and what quality the optimized image should have.', 'Image-Optimizer-by-Web-Pixel-Studio') . '</p>';
+    echo '<p>' . esc_html__('Optimizes images when uploading. Convert JP, PNG, GIF, BMP, TIFF, and HEIC/HEIF files to WebP format. Define the maximum image size and choose which file types should be converted and what quality the optimized image should have.', 'web-pixel-studio-image-compressor') . '</p>';
 }
 
 function imagopby_render_retain_original()
@@ -226,9 +226,9 @@ function imagopby_render_retain_original()
     ?>
     <label for="retain_original" style="display: flex; align-items: center; margin: 0;">
         <input type='checkbox' name='imagopby_settings[retain_original]' id="retain_original" <?php checked(isset($options['retain_original'])); ?> value='1'>
-        <span style="margin-left: 8px;"><?php esc_html_e('Keep the original file without optimization', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></span>
+        <span style="margin-left: 8px;"><?php esc_html_e('Keep the original file without optimization', 'web-pixel-studio-image-compressor'); ?></span>
     </label>
-    <p class="description"><?php esc_html_e('If unchecked, the original image will be deleted after successful conversion to WebP, saving disk space.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('If unchecked, the original image will be deleted after successful conversion to WebP, saving disk space.', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
@@ -238,10 +238,10 @@ function imagopby_render_quality()
     $quality = isset($options['quality']) ? intval($options['quality']) : 80;
     ?>
     <label for="quality">
-        <?php esc_html_e('Image Quality', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+        <?php esc_html_e('Image Quality', 'web-pixel-studio-image-compressor'); ?>
     </label>
     <input type='number' name='imagopby_settings[quality]' id="quality" value='<?php echo esc_attr($quality); ?>' min='0' max='100' step='1'>
-    <p class="description"><?php esc_html_e('Quality after optimization (0-100). Higher values = better quality but larger file size. Default: 80', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('Quality after optimization (0-100). Higher values = better quality but larger file size. Default: 80', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
@@ -251,10 +251,10 @@ function imagopby_render_method()
     $method = isset($options['method']) ? intval($options['method']) : 6;
     ?>
     <label for="method">
-        <?php esc_html_e('Compression Method', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+        <?php esc_html_e('Compression Method', 'web-pixel-studio-image-compressor'); ?>
     </label>
     <input type='number' name='imagopby_settings[method]' id="method" value='<?php echo esc_attr($method); ?>' min='0' max='6' step='1'>
-    <p class="description"><?php esc_html_e('Compression strength (0-6). Higher values = better compression but longer processing time. Default: 6', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('Compression strength (0-6). Higher values = better compression but longer processing time. Default: 6', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
@@ -264,7 +264,7 @@ function imagopby_render_allowed_types()
     $allowedTypes = isset($options['allowed_types']) ? $options['allowed_types'] : ['image/jpeg', 'image/png', 'image/gif'];
     $allTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/svg+xml', 'image/heic', 'image/heif'];
     ?>
-    <label><?php esc_html_e('Image Types to Optimize', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></label>
+    <label><?php esc_html_e('Image Types to Optimize', 'web-pixel-studio-image-compressor'); ?></label>
     <div style="margin-top: 8px;">
         <?php
         foreach ($allTypes as $type) {
@@ -278,7 +278,7 @@ function imagopby_render_allowed_types()
         }
         ?>
     </div>
-    <p class="description"><?php esc_html_e('Select which image types should be optimized. HEIC/HEIF are Apple formats (iPhone/iPad). SVG files usually don\'t need optimization.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('Select which image types should be optimized. HEIC/HEIF are Apple formats (iPhone/iPad). SVG files usually don\'t need optimization.', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
@@ -288,9 +288,9 @@ function imagopby_render_set_alt_text()
     ?>
     <label for="set_alt_text" style="display: flex; align-items: center; margin: 0;">
         <input type='checkbox' name='imagopby_settings[set_alt_text]' id="set_alt_text" <?php checked(isset($options['set_alt_text'])); ?> value='1'>
-        <span style="margin-left: 8px;"><?php esc_html_e('Auto-set alt text from filename', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></span>
+        <span style="margin-left: 8px;"><?php esc_html_e('Auto-set alt text from filename', 'web-pixel-studio-image-compressor'); ?></span>
     </label>
-    <p class="description"><?php esc_html_e('Automatically generate alt text based on the image filename. Useful for SEO if you use descriptive filenames.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('Automatically generate alt text based on the image filename. Useful for SEO if you use descriptive filenames.', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
@@ -300,18 +300,18 @@ function imagopby_render_max_width()
     $maxWidth = isset($options['max_width']) ? intval($options['max_width']) : 1200;
     ?>
     <label for="max_width">
-        <?php esc_html_e('Maximum Image Width', 'Image-Optimizer-by-Web-Pixel-Studio'); ?>
+        <?php esc_html_e('Maximum Image Width', 'web-pixel-studio-image-compressor'); ?>
     </label>
     <input type='number' name='imagopby_settings[max_width]' id="max_width" value='<?php echo esc_attr($maxWidth); ?>' min='0' step='1'>
     <span style="margin-left: 8px; color: #666;">px</span>
-    <p class="description"><?php esc_html_e('Images wider than this will be resized before optimization. Default: 1200 pixels. Set to 0 to disable resizing.', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></p>
+    <p class="description"><?php esc_html_e('Images wider than this will be resized before optimization. Default: 1200 pixels. Set to 0 to disable resizing.', 'web-pixel-studio-image-compressor'); ?></p>
     <?php
 }
 
 function imagopby_render_bulk_optimization_btn()
 {
     ?>
-    <span class="imagopby-bulk-label"><?php esc_html_e('Bulk optimization progress', 'Image-Optimizer-by-Web-Pixel-Studio'); ?></span>
+    <span class="imagopby-bulk-label"><?php esc_html_e('Bulk optimization progress', 'web-pixel-studio-image-compressor'); ?></span>
     <div style="margin-top: 12px;">
         <span id="imagopby-progress-bar-bg" style="display:none;">
             <span id="imagopby-progress-bar"></span>

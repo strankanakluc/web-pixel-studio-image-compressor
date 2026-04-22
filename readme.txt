@@ -1,4 +1,4 @@
-=== Image Optimizer by Web Pixel Studio ===
+=== Web Pixel Studio Image Compressor ===
 Contributors: duddi  
 Tags: images, optimization, webp, compression, resize
 Requires at least: 5.0
@@ -11,7 +11,7 @@ Optimizes images on upload. Define max. size and select the types of images to c
 
 == Description ==
 
-Image Optimizer by Web Pixel Studio optimizes images when uploading. Define the maximum image size and choose which file types should be converted to webp and what the compression or quality of the optimized image should be.
+Web Pixel Studio Image Compressor optimizes images when uploading. Define the maximum image size and choose which file types should be converted to webp and what the compression or quality of the optimized image should be.
 
 = Features =
 * Retain or delete original images after optimization
@@ -22,7 +22,7 @@ Image Optimizer by Web Pixel Studio optimizes images when uploading. Define the 
 * Bulk image optimization
 
 = Settings =
-* Go to Settings -> Image Optimizer by Web Pixel Studio in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
+* Go to Settings -> Web Pixel Studio Image Compressor in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
 
 == Changelog ==
 

@@ -1,9 +1,9 @@
-# Image Optimizer by Web Pixel Studio
+# Web Pixel Studio Image Compressor
 ![Plugin for](https://img.shields.io/badge/Wordpress-21759B?style=flat&logo=wordpress&logoColor=white)
-![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/image-optimizer-by-webpixelstudio?style=flat)
-![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/image-optimizer-by-webpixelstudio?style=flat)
-![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/i/image-optimizer-by-webpixelstudio?style=flat)
-[![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/wps.sk)
+![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/web-pixel-studio-image-compressor?style=flat)
+![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/web-pixel-studio-image-compressor?style=flat)
+![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/i/web-pixel-studio-image-compressor?style=flat)
+[![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/strankanakluc)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/tvorbawebov/)
 
 **Contributors:** duddi  
@@ -27,15 +27,15 @@ Optimizes images on upload. Define max. size and select the types of images to c
 
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/image-optimizer-by-webpixelstudio` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/web-pixel-studio-image-compressor` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the Settings -> Image Optimizer by Web Pixel Studio screen to configure the plugin.
+3. Use the Settings -> Web Pixel Studio Image Compressor screen to configure the plugin.
 
 ## Frequently Asked Questions
 
 ### How can I configure the plugin?
 
-Go to Settings -> Image Optimizer by Web Pixel Studio in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
+Go to Settings -> Web Pixel Studio Image Compressor in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
 
 ### What image types can be converted to WebP?
 
