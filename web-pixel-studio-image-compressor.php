@@ -21,7 +21,7 @@ function imagopby_settings_page()
 {
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Image Optimizer', 'web-pixel-studio-image-compressor'); ?></h1>
+        <h1><?php esc_html_e('Image Compressor', 'web-pixel-studio-image-compressor'); ?></h1>
         
         <form action='options.php' method='post'>
             <div class="imagopby-section-header">
@@ -47,7 +47,7 @@ function imagopby_settings_page()
         </form>
 
         <div class="imagopby-footer">
-            <h2><?php esc_html_e('Thank you for using Image Optimizer!', 'web-pixel-studio-image-compressor'); ?></h2>
+            <h2><?php esc_html_e('Thank you for using Image Compressor!', 'web-pixel-studio-image-compressor'); ?></h2>
             <h3><?php esc_html_e('We\'re committed to helping your website perform better.', 'web-pixel-studio-image-compressor'); ?></h3>
             
             <div class="imagopby-social-links">
@@ -62,7 +62,7 @@ function imagopby_settings_page()
             </p>
             
             <h3 style="margin-top: 20px; font-size: 0.9em; color: #999;">
-                <?php esc_html_e('Image Optimizer by', 'web-pixel-studio-image-compressor'); ?> <strong><?php esc_html_e('Web Pixel Studio', 'web-pixel-studio-image-compressor'); ?></strong>
+                <?php esc_html_e('Image Compressor by', 'web-pixel-studio-image-compressor'); ?> <strong><?php esc_html_e('Web Pixel Studio', 'web-pixel-studio-image-compressor'); ?></strong>
             </h3>
         </div>
     </div>
@@ -111,8 +111,8 @@ add_action('admin_menu', 'imagopby_add_menu');
 function imagopby_add_menu()
 {
     add_options_page(
-        'Image Optimizer Settings',
-        'Image Optimizer',
+        'Image Compressor Settings',
+        'Image Compressor',
         'manage_options',
         'imagopby',
         'imagopby_settings_page'
