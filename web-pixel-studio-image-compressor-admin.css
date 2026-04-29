@@ -258,6 +258,20 @@
   transform: translateY(0);
 }
 
+.wp-die-message, p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 2em;
+  text-align: center;
+}
+
+h2, h3 {
+  color: #1d2327;
+  font-size: 1.3em;
+  margin: 1em 0;
+  text-align: center;
+}
+
 .wrap .submit button:disabled {
   opacity: 0.6;
   cursor: not-allowed;

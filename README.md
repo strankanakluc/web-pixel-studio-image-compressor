@@ -11,7 +11,7 @@
 [![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/strankanakluc)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/tvorbawebov/)
 
-**Contributors:** duddi  
+**Contributors:** duddi, wpssk, webpixelstudio
 **Tags:** images, optimization, webp, compression  
 **Requires at least:** 5.0  
 **Tested up to:** 6.9 

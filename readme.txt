@@ -1,5 +1,5 @@
 === Web Pixel Studio Image Compressor ===
-Contributors: duddi  
+Contributors: duddi, wpssk, webpixelstudio
 Tags: images, optimization, webp, compression, resize
 Requires at least: 5.0
 Tested up to: 6.9

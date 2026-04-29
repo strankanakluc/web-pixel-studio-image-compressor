@@ -16,6 +16,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+define('IMAGOPBY_VERSION', '1.0.0');
+
 // ========== SETTINGS PAGE ==========
 function imagopby_settings_page()
 {
@@ -58,51 +60,14 @@ function imagopby_settings_page()
             
             <h3><?php esc_html_e('Visit our website to learn more:', 'web-pixel-studio-image-compressor'); ?></h3>
             <p class="imagopby-website">
-                <a href="https://wps.sk" target="_blank" rel="noopener noreferrer">wps.sk</a>
+                <a href="https://webpixelstudio.org" target="_blank" rel="noopener noreferrer">webpixelstudio.org</a>
             </p>
             
             <h3 style="margin-top: 20px; font-size: 0.9em; color: #999;">
-                <?php esc_html_e('Image Compressor by', 'web-pixel-studio-image-compressor'); ?> <strong><?php esc_html_e('Web Pixel Studio', 'web-pixel-studio-image-compressor'); ?></strong>
+                <?php esc_html_e('Image Compressor by', 'web-pixel-studio-image-compressor'); ?> <strong><a href="https://wps.sk" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Web Pixel Studio', 'web-pixel-studio-image-compressor'); ?></a></strong>
             </h3>
         </div>
     </div>
-    <script>
-    jQuery(document).ready(function($){
-        $('#imagopby-optimize-gallery-btn').on('click', function(e){
-            e.preventDefault();
-            let $btn = $(this);
-            let $barbg = $('#imagopby-progress-bar-bg').show();
-            let $bar = $('#imagopby-progress-bar').css({width:'0%'}).show();
-            let $status = $('#imagopby-progress-status').text('<?php esc_html_e("Initializing...", "web-pixel-studio-image-compressor"); ?>');
-            $btn.prop('disabled', true);
-            let step = 0;
-            function runStep() {
-                $.post(ajaxurl, {
-                    action:'imagopby_optimize_gallery', 
-                    step:step, 
-                    mode:'delete',
-                    security:'<?php echo esc_js(wp_create_nonce('imagopby_optimize_action')); ?>'
-                }, function(resp){
-                    if(resp.success) {
-                        $bar.css({width:resp.data.progress+'%'});
-                        $status.text(resp.data.progress + '% - <?php esc_html_e("Processing", "web-pixel-studio-image-compressor"); ?>: ' + resp.data.optimized + '/' + resp.data.total);
-                        if(resp.data.finished) {
-                            $btn.prop('disabled', false);
-                            $status.text('<?php esc_html_e("✓ Done! Optimized images:", "web-pixel-studio-image-compressor"); ?> ' + resp.data.optimized);
-                        } else {
-                            step = resp.data.step;
-                            setTimeout(runStep, 400);
-                        }
-                    } else {
-                        $btn.prop('disabled', false);
-                        $status.text('<?php esc_html_e("✗ Error:", "web-pixel-studio-image-compressor"); ?> ' + resp.data);
-                    }
-                });
-            }
-            runStep();
-        });
-    });
-    </script>
     <?php
 }
 
@@ -120,11 +85,39 @@ function imagopby_add_menu()
 }
 
 // Enqueue admin styles
-add_action('admin_enqueue_scripts', 'imagopby_enqueue_admin_styles');
-function imagopby_enqueue_admin_styles($hookSuffix)
+add_action('admin_enqueue_scripts', 'imagopby_enqueue_admin_assets');
+function imagopby_enqueue_admin_assets($hookSuffix)
 {
     if ($hookSuffix == 'settings_page_imagopby') {
-        wp_enqueue_style('imagopby-admin', plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.css', array(), '1.0.0');
+        wp_register_style(
+            'imagopby-admin',
+            plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.css',
+            array(),
+            IMAGOPBY_VERSION
+        );
+        wp_enqueue_style('imagopby-admin');
+
+        wp_register_script(
+            'imagopby-admin',
+            plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.js',
+            array('jquery'),
+            IMAGOPBY_VERSION,
+            true
+        );
+
+        wp_localize_script(
+            'imagopby-admin',
+            'imagopbyAdminData',
+            array(
+                'nonce' => wp_create_nonce('imagopby_optimize_action'),
+                'initializing' => __('Initializing...', 'web-pixel-studio-image-compressor'),
+                'processing' => __('Processing', 'web-pixel-studio-image-compressor'),
+                'done' => __('Done! Optimized images:', 'web-pixel-studio-image-compressor'),
+                'error' => __('Error:', 'web-pixel-studio-image-compressor'),
+            )
+        );
+
+        wp_enqueue_script('imagopby-admin');
     }
 }
 
