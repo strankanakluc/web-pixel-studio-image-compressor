@@ -11,10 +11,10 @@
 [![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/strankanakluc)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/tvorbawebov/)
 
-**Contributors:** duddi, wpssk, webpixelstudio
+**Contributors:** duddi, wpssk, webpixelstudio <br>
 **Tags:** images, optimization, webp, compression  
 **Requires at least:** 5.0  
-**Tested up to:** 6.9 
+**Tested up to:** 6.9 <br>
 **Stable tag:** 1.0.0  
 **License:** GPL v3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
