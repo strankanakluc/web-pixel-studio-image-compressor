@@ -1,21 +1,16 @@
 # Web Pixel Studio Image Compressor
 ![Plugin for](https://img.shields.io/badge/Wordpress-21759B?style=flat&logo=wordpress&logoColor=white)
-![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/image-optimizer-by-webpixelstudio?style=flat)
-![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/image-optimizer-by-webpixelstudio?style=flat)
-![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/i/image-optimizer-by-webpixelstudio?style=flat)
-[![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/wps.sk)
-=======
 ![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/web-pixel-studio-image-compressor?style=flat)
 ![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/web-pixel-studio-image-compressor?style=flat)
-![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/i/web-pixel-studio-image-compressor?style=flat)
-[![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/strankanakluc)
+[![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/wps.sk)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/tvorbawebov/)
+=======
 
-**Contributors:** duddi, wpssk, webpixelstudio
+**Contributors:** duddi, wpssk, webpixelstudio <br>
 **Tags:** images, optimization, webp, compression  
 **Requires at least:** 5.0  
-**Tested up to:** 6.9 
-**Stable tag:** 1.0.0  
+**Tested up to:** 6.9 <br>
+**Stable tag:** 1.0.1  
 **License:** GPL v3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -55,6 +50,13 @@ You can choose to retain or delete the original images after conversion. This ca
 1. **Settings Page:** Configure your WebP image optimization settings.
 
 ## Changelog
+
+### 1.0.1
+* Complete redesign of the admin settings page
+* New card-based layout with sidebar, toggle switches, and image type chips
+* Quality setting now uses a visual range slider
+* Added Settings link to the plugin list page
+* Improved responsive design for mobile screens
 
 ### 1.0.0
 * Initial release

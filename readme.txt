@@ -3,7 +3,7 @@ Contributors: duddi, wpssk, webpixelstudio
 Tags: images, optimization, webp, compression, resize
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,13 @@ Web Pixel Studio Image Compressor optimizes images when uploading. Define the ma
 * Go to Settings -> Web Pixel Studio Image Compressor in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
 
 == Changelog ==
+
+= 1.0.1 =
+* Complete redesign of the admin settings page
+* New card-based layout with sidebar, toggle switches, and image type chips
+* Quality setting now uses a visual range slider
+* Added Settings link to the plugin list page
+* Improved responsive design for mobile screens
 
 = 1.0.0 =
 * Initial release
