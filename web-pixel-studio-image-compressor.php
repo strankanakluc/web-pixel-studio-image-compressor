@@ -4,7 +4,7 @@
  * Plugin URI: http://wordpress.org/plugins/web-pixel-studio-image-compressor
  * Description: Optimizes images on upload. Convert JPEG, PNG, GIF, BMP, TIFF, and HEIC/HEIF to WebP. Define max. size and select the types of images to convert and what quality the optimized image should have.
  * Author: Web Pixel Studio
- * Author URI: https://wps.sk
+ * Author URI: https://webpixelstudio.org
  * Version: 1.0.1
  * Tested up to: 6.9
  * License: GPL-2.0+
