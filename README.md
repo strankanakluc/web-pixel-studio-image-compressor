@@ -28,7 +28,7 @@ Optimizes images on upload. Define max. size and select the types of images to c
 
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/web-pixel-studio-image-compressor` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/web-pixel-studio-image-compressor` directory, or install the plugin through the WordPress plugins screen directly. https://wordpress.org/plugins/web-pixel-studio-image-compressor/
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Use the Settings -> Web Pixel Studio Image Compressor screen to configure the plugin.
 
