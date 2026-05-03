@@ -2,7 +2,7 @@
 ![Plugin for](https://img.shields.io/badge/Wordpress-21759B?style=flat&logo=wordpress&logoColor=white)
 ![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/web-pixel-studio-image-compressor?style=flat)
 ![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/web-pixel-studio-image-compressor?style=flat)
-![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/i/web-pixel-studio-image-compressor?style=flat)
+[![WordPress Plugin Active Installs](wordpress/plugin/r/web-pixel-studio-image-compressor)](https://wordpress.org/plugins/pressidium-cookie-consent/)
 [![Facebook](https://img.shields.io/badge/Facebook-0866FF?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/wps.sk)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/tvorbawebov/)
 =======
