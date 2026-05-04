@@ -11,15 +11,16 @@ Optimizes images on upload. Define max. size and select the types of images to c
 
 == Description ==
 
-Web Pixel Studio Image Compressor optimizes images when uploading. Define the maximum image size and choose which file types should be converted to webp and what the compression or quality of the optimized image should be.
+Speed up your website and improve performance without compromising quality. This powerful yet lightweight plugin gives you full control over image optimization directly in WordPress — from compression settings to automatic alt text generation.
 
 = Features =
-* Retain or delete original images after optimization
-* Set image quality and WebP compression method
-* Convert specific image types to WebP
-* Automatically set image alt text based on filename
-* Define maximum width for uploaded images
-* Bulk image optimization
+* Convert images to modern WebP format for faster loading times
+* Option to keep original images for backup and flexibility
+* Adjust image quality (1–100) — full control over output quality
+* Set compression method (0–6) — from fastest to maximum compression
+* Define maximum image width — larger images are automatically resized
+* Automatically generate alt text based on the image filename (SEO-friendly)
+* Support for multiple formats: JPEG, PNG, GIF, BMP, TIFF, SVG, HEIF, HEIC
 
 = Settings =
 * Go to Settings -> Web Pixel Studio Image Compressor in your WordPress dashboard. Here you can set the image quality, WebP compression method, and other options.
