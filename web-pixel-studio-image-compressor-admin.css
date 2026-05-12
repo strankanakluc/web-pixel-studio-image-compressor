@@ -23,6 +23,62 @@
   --wps-shadow-lg:    0 4px 6px rgba(0,0,0,.05), 0 10px 30px rgba(0,0,0,.1);
 }
 
+/* ===== MEDIA LIBRARY COLUMN ===== */
+.column-imagopby_optimize {
+  width: 120px;
+}
+
+.imagopby-media-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.imagopby-media-badge--webp {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.imagopby-media-badge--excluded {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+
+.imagopby-optimize-single {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 5px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #7C08D0 0%, #9d4edd 100%) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  box-shadow: 0 1px 4px rgba(124,8,208,.25) !important;
+  transition: opacity .15s, box-shadow .15s !important;
+  height: auto !important;
+}
+
+.imagopby-optimize-single:hover:not(:disabled) {
+  opacity: .88 !important;
+  box-shadow: 0 2px 8px rgba(124,8,208,.35) !important;
+}
+
+.imagopby-optimize-single:disabled {
+  opacity: .55 !important;
+  cursor: not-allowed !important;
+}
+
 /* ===== RESET / SCOPED BASE ===== */
 .imagopby-wrap *,
 .imagopby-wrap *::before,

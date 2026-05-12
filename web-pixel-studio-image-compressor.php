@@ -5,7 +5,7 @@
  * Description: Optimizes images on upload. Convert JPEG, PNG, GIF, BMP, TIFF, and HEIC/HEIF to WebP. Define max. size and select the types of images to convert and what quality the optimized image should have.
  * Author: Web Pixel Studio
  * Author URI: https://webpixelstudio.org
- * Version: 1.0.1
+ * Version: 1.0.2
  * Tested up to: 6.9
  * License: GPL-2.0+
  * @category Plugin
@@ -16,7 +16,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('IMAGOPBY_VERSION', '1.0.1');
+define('IMAGOPBY_VERSION', '1.0.2');
 
 // ========== SETTINGS PAGE ==========
 function imagopby_settings_page()
@@ -27,6 +27,7 @@ function imagopby_settings_page()
     $maxWidth     = isset( $options['max_width'] ) ? intval( $options['max_width'] )  : 1200;
     $retainOrig   = ! empty( $options['retain_original'] );
     $setAltText   = ! empty( $options['set_alt_text'] );
+    $autoOptimize = isset( $options['auto_optimize'] ) ? (bool) $options['auto_optimize'] : true;
     $allowedTypes = ( isset( $options['allowed_types'] ) && ! empty( $options['allowed_types'] ) )
                     ? $options['allowed_types']
                     : [ 'image/jpeg', 'image/png', 'image/gif' ];
@@ -171,6 +172,16 @@ function imagopby_settings_page()
                             </div>
                         </div>
                         <div class="imagopby-card-body">
+                            <div class="imagopby-toggle-row">
+                                <div class="imagopby-toggle-info">
+                                    <strong><?php esc_html_e( 'Automatic optimization on upload', 'web-pixel-studio-image-compressor' ); ?></strong>
+                                    <p><?php esc_html_e( 'Automatically convert images to WebP when uploading to the media library. Disable if you want to optimize images manually.', 'web-pixel-studio-image-compressor' ); ?></p>
+                                </div>
+                                <label class="imagopby-toggle" for="auto_optimize">
+                                    <input type="checkbox" name="imagopby_settings[auto_optimize]" id="auto_optimize" <?php checked( $autoOptimize ); ?> value="1">
+                                    <span class="imagopby-toggle-slider"></span>
+                                </label>
+                            </div>
                             <div class="imagopby-toggle-row">
                                 <div class="imagopby-toggle-info">
                                     <strong><?php esc_html_e( 'Keep original file', 'web-pixel-studio-image-compressor' ); ?></strong>
@@ -336,37 +347,42 @@ function imagopby_add_menu()
 add_action('admin_enqueue_scripts', 'imagopby_enqueue_admin_assets');
 function imagopby_enqueue_admin_assets($hookSuffix)
 {
-    if ($hookSuffix == 'settings_page_imagopby') {
-        wp_register_style(
-            'imagopby-admin',
-            plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.css',
-            array(),
-            IMAGOPBY_VERSION
-        );
-        wp_enqueue_style('imagopby-admin');
-
-        wp_register_script(
-            'imagopby-admin',
-            plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.js',
-            array('jquery'),
-            IMAGOPBY_VERSION,
-            true
-        );
-
-        wp_localize_script(
-            'imagopby-admin',
-            'imagopbyAdminData',
-            array(
-                'nonce' => wp_create_nonce('imagopby_optimize_action'),
-                'initializing' => __('Initializing...', 'web-pixel-studio-image-compressor'),
-                'processing' => __('Processing', 'web-pixel-studio-image-compressor'),
-                'done' => __('Done! Optimized images:', 'web-pixel-studio-image-compressor'),
-                'error' => __('Error:', 'web-pixel-studio-image-compressor'),
-            )
-        );
-
-        wp_enqueue_script('imagopby-admin');
+    $allowed_hooks = ['settings_page_imagopby', 'upload.php', 'post.php', 'post-new.php'];
+    if ( ! in_array( $hookSuffix, $allowed_hooks, true ) ) {
+        return;
     }
+    wp_register_style(
+        'imagopby-admin',
+        plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.css',
+        array(),
+        IMAGOPBY_VERSION
+    );
+    wp_enqueue_style('imagopby-admin');
+
+    wp_register_script(
+        'imagopby-admin',
+        plugin_dir_url(__FILE__) . 'web-pixel-studio-image-compressor-admin.js',
+        array('jquery'),
+        IMAGOPBY_VERSION,
+        true
+    );
+
+    wp_localize_script(
+        'imagopby-admin',
+        'imagopbyAdminData',
+        array(
+            'nonce'        => wp_create_nonce('imagopby_optimize_action'),
+            'ajaxUrl'      => admin_url('admin-ajax.php'),
+            'initializing' => __('Initializing...', 'web-pixel-studio-image-compressor'),
+            'processing'   => __('Processing', 'web-pixel-studio-image-compressor'),
+            'done'         => __('Done! Optimized images:', 'web-pixel-studio-image-compressor'),
+            'error'        => __('Error:', 'web-pixel-studio-image-compressor'),
+            'optimizing'   => __('Optimizing...', 'web-pixel-studio-image-compressor'),
+            'optimizeBtn'  => __('Optimize to WebP', 'web-pixel-studio-image-compressor'),
+        )
+    );
+
+    wp_enqueue_script('imagopby-admin');
 }
 
 // Register settings
@@ -450,6 +466,7 @@ function imagopby_sanitize_settings($input)
     if (isset($input['set_alt_text'])) {
         $sanitized['set_alt_text'] = intval($input['set_alt_text']);
     }
+    $sanitized['auto_optimize'] = isset($input['auto_optimize']) ? 1 : 0;
     if (isset($input['max_width'])) {
         $sanitized['max_width'] = intval($input['max_width']);
     }
@@ -568,28 +585,35 @@ function imagopby_ajax_optimize_gallery() {
     check_ajax_referer('imagopby_optimize_action', 'security');
     if (!current_user_can('manage_options')) wp_send_json_error('Unauthorized');
     $step = isset($_POST['step']) ? intval($_POST['step']) : 0;
-    $batch = 10;
-    $mode = 'delete'; // always only delete mode
+    $batch = 5;
 
     if ($step === 0) {
-        $upload_dir = wp_get_upload_dir();
-        $base_dir = trailingslashit($upload_dir['basedir']);
+        // Build list from DB – respects exclude meta and processes only real attachments
+        $all_ids = get_posts([
+            'post_type'      => 'attachment',
+            'post_mime_type' => 'image',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+            'post_status'    => 'inherit',
+        ]);
         $allowed_ext = ['jpg','jpeg','png','gif','bmp','tiff','heic','heif'];
-        $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($base_dir));
-        $files = [];
-        foreach ($rii as $file) {
-            if ($file->isDir()) continue;
-            $ext = strtolower(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-            if (in_array($ext, $allowed_ext)) {
-                $files[] = $file->getPathname();
+        $items = [];
+        foreach ( $all_ids as $id ) {
+            if ( get_post_meta( $id, '_imagopby_exclude', true ) === '1' ) continue;
+            $file = get_attached_file( $id );
+            if ( ! $file || ! file_exists( $file ) ) continue;
+            $ext = strtolower( pathinfo( $file, PATHINFO_EXTENSION ) );
+            if ( in_array( $ext, $allowed_ext ) ) {
+                $items[] = $file;
             }
         }
-        set_transient('imagopby_gallery_files', $files, 30*MINUTE_IN_SECONDS);
+        set_transient('imagopby_gallery_files', $items, 30 * MINUTE_IN_SECONDS);
     } else {
-        $files = get_transient('imagopby_gallery_files');
-        if (!$files) wp_send_json_error('Session expired');
+        $items = get_transient('imagopby_gallery_files');
+        if ($items === false) wp_send_json_error('Session expired');
     }
 
+    $files = $items;
     $total = count($files);
     $from = $step * $batch;
     $to = min($from + $batch, $total);
@@ -624,7 +648,7 @@ function imagopby_ajax_optimize_gallery() {
     wp_die();
 }
 
-function imagopby_optimize_and_replace_with_webp($filePath, $keep_original = false) {
+function imagopby_optimize_and_replace_with_webp($filePath, $keep_original = false, $attachment_id = 0) {
     $ext = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
     if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'heic', 'heif']) || $ext === 'webp') {
         return false;
@@ -643,21 +667,30 @@ function imagopby_optimize_and_replace_with_webp($filePath, $keep_original = fal
     if (is_wp_error($imageEditor)) return false;
 
     $imageSize = $imageEditor->get_size();
-    if ($imageSize && isset($imageSize['width']) && $imageSize['width'] > $maxWidth) {
+    if ($maxWidth > 0 && $imageSize && isset($imageSize['width']) && $imageSize['width'] > $maxWidth) {
         $imageEditor->resize($maxWidth, null);
     }
 
-    $imageEditor->save($newWebpPath, 'image/webp', array('quality' => $quality));
+    $saved = $imageEditor->save($newWebpPath, 'image/webp', array('quality' => $quality));
+    if (is_wp_error($saved) || !file_exists($newWebpPath)) {
+        return false;
+    }
 
     $upload_dir = wp_get_upload_dir();
     $relative_path = str_replace(trailingslashit($upload_dir['basedir']), '', $filePath);
-    $attachment_url = $upload_dir['url'] . '/' . $relative_path;
-    $attachment_id = attachment_url_to_postid($attachment_url);
+    $relative_path = ltrim(str_replace('\\', '/', $relative_path), '/');
+
+    if (!$attachment_id) {
+        $attachment_url = trailingslashit($upload_dir['baseurl']) . $relative_path;
+        $attachment_id  = attachment_url_to_postid($attachment_url);
+    }
 
     if ($attachment_id && file_exists($newWebpPath)) {
         $upload_dir = wp_upload_dir();
-        $new_url = $upload_dir['url'] . '/' . basename($newWebpPath);
         $relative_path = str_replace(trailingslashit($upload_dir['basedir']), '', $newWebpPath);
+        $relative_path = ltrim(str_replace('\\', '/', $relative_path), '/');
+        $new_url = trailingslashit($upload_dir['baseurl']) . $relative_path;
+
         update_post_meta($attachment_id, '_wp_attached_file', $relative_path);
         wp_update_post(array(
             'ID' => $attachment_id,
@@ -705,6 +738,10 @@ function imagopby_handle_upload($upload)
 {
     $options = get_option('imagopby_settings');
     $retainOriginal = isset($options['retain_original']) ? $options['retain_original'] : false;
+    $autoOptimize = isset($options['auto_optimize']) ? (bool) $options['auto_optimize'] : true;
+    if ( ! $autoOptimize ) {
+        return $upload;
+    }
     $quality = isset($options['quality']) ? intval($options['quality']) : 80;
     $method = isset($options['method']) ? intval($options['method']) : 6;
     $maxWidth = isset($options['max_width']) ? intval($options['max_width']) : 1200;
@@ -724,7 +761,7 @@ function imagopby_handle_upload($upload)
     $imageEditor = wp_get_image_editor($filePath);
     if (!is_wp_error($imageEditor)) {
         $imageSize = $imageEditor->get_size();
-        if ($imageSize['width'] > $maxWidth) {
+        if ($maxWidth > 0 && $imageSize && isset($imageSize['width']) && $imageSize['width'] > $maxWidth) {
             $imageEditor->resize($maxWidth, null);
             $imageEditor->save($filePath);
         }
@@ -732,17 +769,29 @@ function imagopby_handle_upload($upload)
 
     $newFilePath = $fileInfo['dirname'] . '/' . wp_unique_filename($fileInfo['dirname'], $fileInfo['filename'] . '.webp');
     if (extension_loaded('imagick')) {
-        $image = new Imagick($filePath);
-        $image->setImageFormat('webp');
-        $image->setOption('webp:method', $method);
-        $image->setImageCompressionQuality($quality);
-        $image->stripImage();
-        $image->writeImage($newFilePath);
-        $image->clear();
-        $image->destroy();
+        try {
+            $image = new Imagick($filePath);
+            $image->setImageFormat('webp');
+            $image->setOption('webp:method', $method);
+            $image->setImageCompressionQuality($quality);
+            $image->stripImage();
+            $written = $image->writeImage($newFilePath);
+            $image->clear();
+            $image->destroy();
+            if (!$written) {
+                return $upload;
+            }
+        } catch (Exception $e) {
+            return $upload;
+        }
     } elseif (extension_loaded('gd')) {
         if (!is_wp_error($imageEditor)) {
-            $imageEditor->save($newFilePath, 'image/webp', array('quality' => $quality));
+            $saved = $imageEditor->save($newFilePath, 'image/webp', array('quality' => $quality));
+            if (is_wp_error($saved)) {
+                return $upload;
+            }
+        } else {
+            return $upload;
         }
     } else {
         // No suitable image library found
@@ -786,4 +835,86 @@ function imagopby_plugin_action_links( $links ) {
     $settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=imagopby' ) ) . '">' . esc_html__( 'Settings', 'web-pixel-studio-image-compressor' ) . '</a>';
     array_unshift( $links, $settings_link );
     return $links;
+}
+
+// ========== EXCLUDE FROM OPTIMIZATION (per-image meta) ==========
+add_filter( 'attachment_fields_to_edit', 'imagopby_attachment_fields_to_edit', 10, 2 );
+function imagopby_attachment_fields_to_edit( $form_fields, $post ) {
+    if ( ! wp_attachment_is_image( $post->ID ) ) {
+        return $form_fields;
+    }
+    $exclude  = get_post_meta( $post->ID, '_imagopby_exclude', true );
+    $is_webp  = get_post_mime_type( $post->ID ) === 'image/webp';
+
+    $html = '<label style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">'
+          . '<input type="checkbox" name="attachments[' . esc_attr( $post->ID ) . '][imagopby_exclude]" value="1" ' . checked( $exclude, '1', false ) . '>'
+          . esc_html__( 'Exclude from optimization', 'web-pixel-studio-image-compressor' )
+          . '</label>';
+
+    if ( $is_webp ) {
+        $html .= '<span class="imagopby-media-badge imagopby-media-badge--webp">WebP ✓</span>';
+    } elseif ( $exclude !== '1' ) {
+        $html .= '<br><button type="button" class="button button-small imagopby-optimize-single" data-id="' . esc_attr( $post->ID ) . '" style="margin-top:6px;">'
+               . esc_html__( 'Optimize to WebP', 'web-pixel-studio-image-compressor' )
+               . '</button>'
+               . '<span class="imagopby-single-status" style="margin-left:8px;font-size:12px;"></span>';
+    }
+
+    $form_fields['imagopby_exclude'] = [
+        'label' => __( 'Image Compressor', 'web-pixel-studio-image-compressor' ),
+        'input' => 'html',
+        'html'  => $html,
+    ];
+    return $form_fields;
+}
+
+add_filter( 'attachment_fields_to_save', 'imagopby_attachment_fields_to_save', 10, 2 );
+function imagopby_attachment_fields_to_save( $post, $attachment ) {
+    if ( isset( $attachment['imagopby_exclude'] ) ) {
+        update_post_meta( $post['ID'], '_imagopby_exclude', '1' );
+    } else {
+        delete_post_meta( $post['ID'], '_imagopby_exclude' );
+    }
+    return $post;
+}
+
+// ========== SINGLE IMAGE OPTIMIZE (AJAX) ==========
+add_action( 'wp_ajax_imagopby_optimize_single', 'imagopby_ajax_optimize_single' );
+function imagopby_ajax_optimize_single() {
+    check_ajax_referer( 'imagopby_optimize_action', 'security' );
+    if ( ! current_user_can( 'upload_files' ) ) {
+        wp_send_json_error( __( 'Unauthorized', 'web-pixel-studio-image-compressor' ) );
+    }
+    $post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+    if ( ! $post_id ) {
+        wp_send_json_error( __( 'Invalid image ID.', 'web-pixel-studio-image-compressor' ) );
+    }
+    $exclude = get_post_meta( $post_id, '_imagopby_exclude', true );
+    if ( $exclude === '1' ) {
+        wp_send_json_error( __( 'Image is excluded from optimization.', 'web-pixel-studio-image-compressor' ) );
+    }
+    $file = get_attached_file( $post_id );
+    if ( ! $file || ! file_exists( $file ) ) {
+        wp_send_json_error( __( 'File not found.', 'web-pixel-studio-image-compressor' ) );
+    }
+    $result = imagopby_optimize_and_replace_with_webp( $file, false, $post_id );
+    if ( $result ) {
+        $updated_file = get_attached_file( $post_id );
+        $updated_post = get_post( $post_id );
+        $updated_url  = wp_get_attachment_url( $post_id );
+        $filename     = $updated_file ? wp_basename( $updated_file ) : '';
+
+        $filesize_bytes = $updated_file && file_exists( $updated_file ) ? filesize( $updated_file ) : 0;
+        wp_send_json_success( array(
+            'message'          => __( 'Optimized!', 'web-pixel-studio-image-compressor' ),
+            'id'               => $post_id,
+            'url'              => $updated_url,
+            'mime'             => $updated_post ? $updated_post->post_mime_type : 'image/webp',
+            'filename'         => $filename,
+            'filesizeInBytes'  => $filesize_bytes,
+            'filesizeHumanReadable' => $filesize_bytes ? size_format( $filesize_bytes ) : '',
+        ) );
+    } else {
+        wp_send_json_error( __( 'Optimization failed. File may already be WebP or unsupported.', 'web-pixel-studio-image-compressor' ) );
+    }
 }

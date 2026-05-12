@@ -12,7 +12,7 @@
 **Tags:** images, optimization, webp, compression  
 **Requires at least:** 5.0  
 **Tested up to:** 6.9 <br>
-**Stable tag:** 1.0.1  
+**Stable tag:** 1.0.2  
 **License:** GPL v3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -53,12 +53,25 @@ You can choose to retain or delete the original images after conversion. This ca
 
 ## Changelog
 
+### 1.0.2
+* Added "Optimize to WebP" button in individual attachment detail view
+* Added per-image "Exclude from optimization" option in attachment detail view
+* Added auto-optimize on upload toggle in plugin settings
+* File size, filename and thumbnail refresh immediately after single-image optimization
+* Fixed upload breakage caused by missing max_width guard and unhandled Imagick exceptions
+* Removed direct database queries in favour of WordPress API calls
+
 ### 1.0.1
 * Complete redesign of the admin settings page
 * New card-based layout with sidebar, toggle switches, and image type chips
 * Quality setting now uses a visual range slider
 * Added Settings link to the plugin list page
 * Improved responsive design for mobile screens
+
+## Upgrade Notice
+
+### 1.0.2
+Adds per-image optimize & exclude controls in the media library, auto-optimize toggle, and instant UI refresh after optimization. Recommended update for all users.
 
 ### 1.0.0
 * Initial release
